@@ -25,6 +25,7 @@ const ForkTsCheckerWebpackPlugin =
     ? require("react-dev-utils/ForkTsCheckerWarningWebpackPlugin")
     : require("react-dev-utils/ForkTsCheckerWebpackPlugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const createEnvironmentHash = require("./webpack/persistentCache/createEnvironmentHash");
 
@@ -572,6 +573,20 @@ module.exports = function (webpackEnv) {
       ].filter(Boolean),
     },
     plugins: [
+      new CopyPlugin({
+        patterns: [
+          { from: "src/public", to: "public" },
+          {
+            from: "node_modules/@tensorflow/tfjs-tflite/dist/tflite_web_api_cc_simd.js",
+            to: "static/js",
+          },
+          {
+            from: "node_modules/@tensorflow/tfjs-tflite/dist/tflite_web_api_cc_simd.wasm",
+            to: "static/js",
+          },
+        ],
+      }),
+
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(

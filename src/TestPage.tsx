@@ -2,6 +2,12 @@ import React from "react";
 import cv from "@techstark/opencv-js";
 import { loadHaarFaceModels, detectHaarFace } from "./haarFaceDetection";
 import { withEdge } from "./withEdge";
+// Adds the CPU backend.
+import "@tensorflow/tfjs-backend-cpu";
+// Import @tensorflow/tfjs-core
+import * as tf from "@tensorflow/tfjs-core";
+// Import @tensorflow/tfjs-tflite.
+import * as tflite from "@tensorflow/tfjs-tflite";
 
 // @ts-ignore
 window.cv = cv;
